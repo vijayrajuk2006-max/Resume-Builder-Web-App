@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume Builder</title>
+
+<style>
+:root{
+  --primary:#2563eb;
+  --dark:#111827;
+  --light:#f3f4f6;
+  --gray:#6b7280;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+}
+
+body{
+  background:var(--light);
+  padding:40px;
+}
+
+.container{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  max-width:1100px;
+  margin:auto;
+}
+
+/* Form Section */
+.form-section{
+  background:white;
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+.form-section h2{
+  margin-bottom:15px;
+}
+
+input, textarea{
+  width:100%;
+  padding:8px;
+  margin-bottom:12px;
+  border:1px solid #ddd;
+  border-radius:5px;
+  font-size:14px;
+}
+
+button{
+  padding:8px 15px;
+  border:none;
+  background:var(--primary);
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+  margin-right:10px;
+}
+
+/* Resume Preview */
+.preview{
+  background:white;
+  padding:30px;
+  border-radius:8px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+.preview h1{
+  margin-bottom:5px;
+}
+
+.preview h3{
+  margin-top:20px;
+  margin-bottom:5px;
+  color:var(--primary);
+}
+
+.preview p{
+  font-size:14px;
+  color:var(--gray);
+}
+
+@media(max-width:900px){
+  .container{
+    grid-template-columns:1fr;
+  }
+}
+
+@media print{
+  body{
+    background:white;
+  }
+  .form-section, button{
+    display:none;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Form -->
+  <div class="form-section">
+    <h2>Enter Resume Details</h2>
+
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="text" id="title" placeholder="Professional Title">
+    <input type="email" id="email" placeholder="Email">
+    <input type="text" id="phone" placeholder="Phone">
+
+    <textarea id="summary" rows="3" placeholder="Professional Summary"></textarea>
+    <textarea id="skills" rows="3" placeholder="Skills (comma separated)"></textarea>
+    <textarea id="experience" rows="3" placeholder="Work Experience"></textarea>
+
+    <button onclick="generateResume()">Generate</button>
+    <button onclick="window.print()">Print</button>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview" id="resumePreview">
+    <h1>Your Name</h1>
+    <p>Professional Title</p>
+    <p>Email | Phone</p>
+
+    <h3>Summary</h3>
+    <p>Professional summary will appear here.</p>
+
+    <h3>Skills</h3>
+    <p>Skills will appear here.</p>
+
+    <h3>Experience</h3>
+    <p>Experience details will appear here.</p>
+  </div>
+
+</div>
+
+<script>
+function generateResume(){
+  const name = document.getElementById("name").value;
+  const title = document.getElementById("title").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const summary = document.getElementById("summary").value;
+  const skills = document.getElementById("skills").value;
+  const experience = document.getElementById("experience").value;
+
+  const preview = document.getElementById("resumePreview");
+
+  preview.innerHTML = `
+    <h1>${name}</h1>
+    <p>${title}</p>
+    <p>${email} | ${phone}</p>
+
+    <h3>Summary</h3>
+    <p>${summary}</p>
+
+    <h3>Skills</h3>
+    <p>${skills}</p>
+
+    <h3>Experience</h3>
+    <p>${experience}</p>
+  `;
+}
+</script>
+
+</body>
+</html>
